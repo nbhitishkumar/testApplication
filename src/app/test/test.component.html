@@ -1,0 +1,49 @@
+<div *ngIf="showLoader"  class="loader"></div>
+<div class="col-12 col-md-6 col-lg-10">
+  <div class="">
+    <div class="text-right">
+      <form [formGroup]="userLogin" >
+        <div fxLayout fxLayoutAlign="center center">
+          <mat-form-field fxFlex="40%">
+            <input matInput type="text" (keyup)="doFilter()" [formControl]="search" placeholder="Search.....">
+          </mat-form-field>
+        </div>
+      </form>
+    </div>
+    <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="userId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> UserID </th>
+        <td mat-cell *matCellDef="let element"> {{element.userId}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="completed">
+        <th mat-header-cell *matHeaderCellDef> completed </th>
+        <td mat-cell *matCellDef="let element"> {{element.completed}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td mat-cell *matCellDef="let element" class="action-link">
+          <button (click)="viewDetails(element.userId)" mat-raised-button color="primary">View Details</button>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
+
